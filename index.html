@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Banjo | Loot in a Boot</title>
+
+<style>
+:root{
+    --bg:#1a120d;
+    --bg2:#2c1a12;
+    --rust:#9f4c2c;
+    --ochre:#d9823d;
+    --sand:#e8c79c;
+    --cream:#f6e7cf;
+    --muted:#c7a986;
+    --dark:#100b08;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(180,75,35,.16), transparent 28%),
+        linear-gradient(to bottom,#24150f,#3d2216 45%,#17100c 100%);
+    color:var(--cream);
+    overflow-x:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+/* NAV */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(20,13,9,.9);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+nav{
+    max-width:1180px;
+    margin:auto;
+    padding:18px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-size:.85rem;
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+}
+
+.nav-links a{
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:.13em;
+    color:#d8b991;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+@media(max-width:700px){
+    nav{
+        flex-direction:column;
+        gap:14px;
+    }
+
+    .nav-links{
+        gap:15px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+}
+
+/* HERO */
+
+.hero{
+    min-height:90vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:80px 24px;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:auto 0 0 0;
+    height:160px;
+    background:linear-gradient(to bottom,transparent,#432519);
+}
+
+.hero-inner{
+    width:min(1180px,100%);
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:50px;
+    align-items:center;
+    position:relative;
+    z-index:2;
+}
+
+.eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    color:var(--ochre);
+    font-size:.72rem;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(5rem,11vw,9rem);
+    line-height:.8;
+    text-transform:uppercase;
+    letter-spacing:-.07em;
+}
+
+.hero h1 span{
+    display:block;
+    margin-top:24px;
+    font-size:.2em;
+    letter-spacing:.08em;
+    color:var(--sand);
+}
+
+.hero p{
+    margin-top:30px;
+    max-width:590px;
+    color:#ddc5a6;
+    line-height:1.75;
+    font-size:1.1rem;
+}
+
+.tagline{
+    margin-top:28px;
+    display:inline-block;
+    padding:12px 0;
+    border-top:1px solid rgba(255,255,255,.22);
+    border-bottom:1px solid rgba(255,255,255,.22);
+    font-style:italic;
+}
+
+.hero-art{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+.hero-art::before{
+    content:"";
+    position:absolute;
+    width:440px;
+    height:440px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(214,121,55,.28),transparent 70%);
+}
+
+.hero-art img{
+    width:min(500px,100%);
+    position:relative;
+    z-index:2;
+    filter:drop-shadow(0 25px 18px rgba(0,0,0,.4));
+}
+
+@media(max-width:850px){
+    .hero-inner{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-art img{
+        width:min(400px,90%);
+    }
+}
+
+/* SECTIONS */
+
+section{
+    padding:105px 24px;
+}
+
+.inner{
+    width:min(1100px,100%);
+    margin:auto;
+}
+
+.section-label{
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:.7rem;
+    font-weight:900;
+    color:#e09a55;
+    margin-bottom:15px;
+}
+
+h2{
+    font-size:clamp(2.7rem,6vw,5rem);
+    line-height:.96;
+    text-transform:uppercase;
+    letter-spacing:-.04em;
+    margin-bottom:28px;
+}
+
+.copy{
+    max-width:760px;
+    font-size:1.06rem;
+    line-height:1.85;
+    color:#d4b99b;
+}
+
+/* STORY */
+
+.story{
+    background:
+        radial-gradient(circle at 20% 50%,rgba(192,88,40,.15),transparent 35%),
+        linear-gradient(to bottom,#432519,#332016);
+}
+
+.story-grid{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:65px;
+}
+
+.quote{
+    border-left:3px solid var(--ochre);
+    padding-left:28px;
+    font-size:clamp(1.8rem,4vw,3.2rem);
+    font-weight:900;
+    line-height:1.15;
+}
+
+.quote small{
+    display:block;
+    margin-top:18px;
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    color:#d7a66f;
+}
+
+@media(max-width:780px){
+    .story-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* NAME */
+
+.name{
+    background:linear-gradient(145deg,#6a3a20,#402418 60%,#271913);
+}
+
+.name-card{
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.035);
+    padding:48px;
+}
+
+.name-card h3{
+    font-family:Georgia,serif;
+    font-size:clamp(2rem,4vw,3.4rem);
+    font-style:italic;
+    color:#f3d8b5;
+    margin-bottom:20px;
+}
+
+.name-card p{
+    max-width:850px;
+    color:#dbc2a3;
+    line-height:1.8;
+    margin-bottom:17px;
+}
+
+.name-card .note{
+    font-size:.82rem;
+    color:#aa8969;
+}
+
+/* LARRIKIN */
+
+.larrikin{
+    background:#21140f;
+    text-align:center;
+}
+
+.larrikin .copy{
+    margin:auto;
+}
+
+.definition{
+    margin:45px auto 0;
+    max-width:720px;
+    padding:28px;
+    border-top:1px solid rgba(255,255,255,.15);
+    border-bottom:1px solid rgba(255,255,255,.15);
+    font-family:Georgia,serif;
+    font-style:italic;
+    font-size:1.25rem;
+    line-height:1.7;
+    color:#e7cbaa;
+}
+
+/* JOURNEY */
+
+.journey{
+    text-align:center;
+    background:
+        radial-gradient(circle at 80% 30%,rgba(255,157,72,.13),transparent 28%),
+        linear-gradient(to bottom,#382217,#5a2e1e,#2b1914);
+}
+
+.journey .copy{
+    margin:auto;
+}
+
+.travel-line{
+    margin:55px auto 40px;
+    width:min(850px,90%);
+    height:2px;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            var(--ochre) 0 10px,
+            transparent 10px 20px
+        );
+}
+
+.travel-points{
+    width:min(850px,90%);
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+}
+
+.travel-points div:last-child{
+    text-align:right;
+}
+
+.travel-points strong{
+    display:block;
+    color:#e1a263;
+    text-transform:uppercase;
+    letter-spacing:.15em;
+    font-size:.68rem;
+}
+
+.travel-points span{
+    display:block;
+    margin-top:7px;
+    font-size:1.25rem;
+    font-weight:900;
+}
+
+/* DCON */
+
+.dcon{
+    background:
+        radial-gradient(circle at 80% 10%,rgba(255,177,74,.15),transparent 30%),
+        linear-gradient(to bottom,#211512,#110c09);
+}
+
+.dcon-head{
+    text-align:center;
+    max-width:850px;
+    margin:auto;
+}
+
+.dcon-title{
+    font-size:clamp(3rem,8vw,7rem);
+    line-height:.87;
+    text-transform:uppercase;
+    letter-spacing:-.05em;
+    font-weight:1000;
+}
+
+.dcon-title span{
+    color:#df813d;
+}
+
+.dcon-head p{
+    margin:28px auto 0;
+    max-width:740px;
+    color:#c9ad8c;
+    line-height:1.8;
+}
+
+/* RELEASES */
+
+.releases{
+    margin-top:70px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+.card{
+    border:1px solid rgba(255,255,255,.13);
+    background:rgba(255,255,255,.035);
+    overflow:hidden;
+}
+
+.card-image{
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+    background:radial-gradient(circle,rgba(220,122,53,.13),transparent 65%);
+}
+
+.card-image img{
+    max-height:100%;
+    filter:drop-shadow(0 18px 14px rgba(0,0,0,.35));
+}
+
+.card-body{
+    padding:26px;
+}
+
+.card-label{
+    color:#db8b45;
+    text-transform:uppercase;
+    letter-spacing:.17em;
+    font-size:.68rem;
+    font-weight:900;
+}
+
+.card h3{
+    margin:10px 0 16px;
+    font-size:1.7rem;
+    text-transform:uppercase;
+}
+
+.card p{
+    color:#c6aa8b;
+    line-height:1.7;
+    margin-top:12px;
+}
+
+@media(max-width:900px){
+    .releases{
+        grid-template-columns:1fr;
+        max-width:520px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+}
+
+/* FOOTER */
+
+footer{
+    background:#0e0907;
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:60px 24px;
+    text-align:center;
+}
+
+footer strong{
+    text-transform:uppercase;
+    letter-spacing:.15em;
+    font-size:.78rem;
+}
+
+footer p{
+    margin-top:13px;
+    color:#876d58;
+    font-size:.8rem;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a class="logo" href="#top">Banjo</a>
+
+        <div class="nav-links">
+            <a href="#story">Meet Banjo</a>
+            <a href="#name">The Name</a>
+            <a href="#dcon">DCon Las Vegas</a>
+            <a href="#releases">Releases</a>
+        </div>
+    </nav>
+</header>
+
+<section class="hero" id="top">
+
+    <div class="hero-inner">
+
+        <div>
+            <div class="eyebrow">A Loot in a Boot Original Character</div>
+
+            <h1>
+                Banjo
+                <span>The Red-Bellied Pirate Snake</span>
+            </h1>
+
+            <p>
+                A pirate hat. A red belly. A reputation that arrived
+                long before he did.
+            </p>
+
+            <div class="tagline">
+                Not every snake is the villain of the story.
+            </div>
+        </div>
+
+        <div class="hero-art">
+            <img src="images/banjo.png" alt="Banjo the red-bellied pirate snake">
+        </div>
+
+    </div>
+
+</section>
+
+<section class="story" id="story">
+
+    <div class="inner story-grid">
+
+        <div class="quote">
+            Everyone had already decided what kind of snake he was.
+
+            <small>They probably should have asked Banjo.</small>
+        </div>
+
+        <div>
+            <div class="section-label">Meet Banjo</div>
+
+            <h2>Misunderstood<br>from the start.</h2>
+
+            <div class="copy">
+                <p>
+                    Banjo is an Australian red-bellied black snake with
+                    a pirate hat, a wandering streak and an unfortunate
+                    talent for making a questionable first impression.
+                </p>
+
+                <br>
+
+                <p>
+                    People saw the snake. They saw the pirate.
+                    They made their assumptions.
+                </p>
+
+                <br>
+
+                <p>
+                    But if anyone actually took the time to know Banjo,
+                    they'd discover he was never particularly good at
+                    being a bad pirate in the first place.
+                </p>
+
+                <br>
+
+                <p>
+                    He's cheeky, curious, occasionally chaotic and more
+                    than capable of finding trouble — but beneath the
+                    reputation is a thoroughly Australian larrikin who
+                    would rather create a good story than become the
+                    villain of one.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="name" id="name">
+
+    <div class="inner">
+
+        <div class="section-label">What's in a name?</div>
+
+        <div class="name-card">
+
+            <h3>Why “Banjo”?</h3>
+
+            <p>
+                Banjo takes his name with a tip of the hat to
+                <strong>A.B. “Banjo” Paterson</strong>, one of Australia's
+                great storytellers.
+            </p>
+
+            <p>
+                Paterson's poems and stories helped capture the characters,
+                humour and mythology of Australian bush life.
+            </p>
+
+            <p>
+                Our Banjo might be a red-bellied black snake rather than
+                a bush poet, but he's setting out to create a few unlikely
+                Australian stories of his own.
+            </p>
+
+            <p class="note">
+                A nod to Australian storytelling — Banjo is an original
+                Loot in a Boot character and is not an adaptation of
+                Paterson or his works.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="larrikin">
+
+    <div class="inner">
+
+        <div class="section-label">The Banjo Philosophy</div>
+
+        <h2>A little bit<br>larrikin.</h2>
+
+        <p class="copy">
+            Banjo leans into that particularly Australian kind of character:
+            cheeky, irreverent, rough around the edges and usually halfway
+            into a questionable plan before anyone has had a chance to stop him.
+        </p>
+
+        <div class="definition">
+            Mischievous. Irreverent. A little rough around the edges.
+            Usually having far more fun than everyone else.
+        </div>
+
+    </div>
+
+</section>
+
+<section class="journey">
+
+    <div class="inner">
+
+        <div class="section-label">Banjo's First Big Adventure</div>
+
+        <h2>From the bush<br>to the Mojave.</h2>
+
+        <p class="copy">
+            Red dirt behind him. Desert ahead. Banjo is leaving Australia
+            and crossing the Pacific for his official debut in Las Vegas.
+        </p>
+
+        <div class="travel-line"></div>
+
+        <div class="travel-points">
+            <div>
+                <strong>Where it begins</strong>
+                <span>Australia</span>
+            </div>
+
+            <div>
+                <strong>Where he's headed</strong>
+                <span>Las Vegas</span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="dcon" id="dcon">
+
+    <div class="inner">
+
+        <div class="dcon-head">
+
+            <div class="section-label">Official Character Debut</div>
+
+            <div class="dcon-title">
+                DesignerCon<br>
+                <span>Las Vegas</span>
+            </div>
+
+            <p>
+                Banjo makes his official debut at DesignerCon Las Vegas,
+                bringing a little Australian red dirt, pirate nonsense
+                and larrikin spirit along for the ride.
+            </p>
+
+            <p>
+                And apparently one version of Banjo wasn't enough.
+            </p>
+
+        </div>
+
+        <div class="releases" id="releases">
+
+            <article class="card">
+
+                <div class="card-image">
+                    <img src="images/banjo.png" alt="Banjo">
+                </div>
+
+                <div class="card-body">
+
+                    <div class="card-label">The Original</div>
+
+                    <h3>Banjo</h3>
+
+                    <p>
+                        The misunderstood pirate himself.
+                    </p>
+
+                    <p>
+                        Red-bellied, hat firmly in place and heading overseas
+                        with a reputation he probably didn't earn.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <article class="card">
+
+                <div class="card-image">
+                    <img src="images/banjo-fool.png" alt="Banjo the Fool">
+                </div>
+
+                <div class="card-body">
+
+                    <div class="card-label">The Larrikin</div>
+
+                    <h3>Banjo the Fool</h3>
+
+                    <p>
+                        Never mistake foolishness for stupidity.
+                    </p>
+
+                    <p>
+                        Banjo the Fool is the joker of the bush —
+                        irreverent, ridiculous and probably enjoying
+                        himself far more than he should be.
+                    </p>
+
+                    <p>
+                        He may look the fool, but with Banjo,
+                        appearances have never told the whole story.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <article class="card">
+
+                <div class="card-image">
+                    <img src="images/banjo-spattertail.png" alt="Banjo Spattertail">
+                </div>
+
+                <div class="card-body">
+
+                    <div class="card-label">The Artist... Apparently</div>
+
+                    <h3>Banjo Spattertail</h3>
+
+                    <p>
+                        The outback doesn't colour inside the lines.
+                    </p>
+
+                    <p>
+                        Red dirt. Blue skies. Burnt-orange sunsets.
+                        Dust on absolutely everything.
+                    </p>
+
+                    <p>
+                        Somewhere along the way Banjo decided all of that
+                        needed putting on a canvas.
+                    </p>
+
+                    <p>
+                        Unfortunately, nobody explained how.
+                    </p>
+
+                    <p>
+                        Art? Maybe.<br>
+                        Mess? Definitely.<br>
+                        Banjo? Absolutely.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section style="text-align:center;background:#17100c;">
+
+    <div class="inner">
+
+        <div class="section-label">This is only the beginning</div>
+
+        <h2>One snake.<br>Plenty of stories.</h2>
+
+        <p class="copy" style="margin:auto;">
+            DesignerCon Las Vegas marks the beginning of Banjo's story.
+            Where this wandering Australian pirate slithers off to after
+            that is anyone's guess.
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <strong>Banjo · A Loot in a Boot Original Character</strong>
+
+    <p>
+        From Australian red dirt to wherever the trail leads next.
+    </p>
+
+</footer>
+
+</body>
+</html>
