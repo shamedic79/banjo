@@ -486,6 +486,9 @@ h2{
     }
 }
 
+.card-image img{width:100%;height:100%;object-fit:contain;}
+.card-image.image-pending::after{content:"Photo coming soon";font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#c7a986;}
+
 /* FOOTER */
 
 footer{
@@ -728,99 +731,69 @@ footer p{
         <div class="releases" id="releases">
 
             <article class="card">
-
                 <div class="card-image">
-                    <img src="images/banjo.png" alt="Banjo">
+                    <img src="images/banjo.png" alt="Banjo original character" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('image-pending')">
                 </div>
-
                 <div class="card-body">
-
                     <div class="card-label">The Original</div>
-
                     <h3>Banjo</h3>
-
-                    <p>
-                        The misunderstood pirate himself.
-                    </p>
-
-                    <p>
-                        Red-bellied, hat firmly in place and heading overseas
-                        with a reputation he probably didn't earn.
-                    </p>
-
+                    <p>Banjo, the misunderstood Australian red-bellied black snake. A little cheeky, a little chaotic, and ready for his next adventure.</p>
                 </div>
-
             </article>
 
             <article class="card">
-
                 <div class="card-image">
-                    <img src="images/banjo-fool.png" alt="Banjo the Fool">
+                    <img src="images/banjo Dcon 5 minis.png" alt="Five mini Banjo figures released at DesignerCon Las Vegas" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('image-pending')">
                 </div>
-
                 <div class="card-body">
+                    <div class="card-label">DCon Las Vegas 2026 · Five Minis</div>
+                    <h3>Mini Banjos</h3>
+                    <p>Five little Banjos made their debut at DesignerCon Las Vegas 2026 — three red and two blackcurrant minis.</p>
+                </div>
+            </article>
 
-                    <div class="card-label">The Larrikin</div>
+            <article class="card">
+                <div class="card-image">
+                    <img src="images/Banjo Solid Black.png" alt="Solid black Banjo figure" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('image-pending')">
+                </div>
+                <div class="card-body">
+                    <div class="card-label">DCon Las Vegas 2026</div>
+                    <h3>Banjo · Solid Black</h3>
+                    <p>A striking solid-black edition of Banjo, made for his Las Vegas debut.</p>
+                </div>
+            </article>
 
+            <article class="card">
+                <div class="card-image">
+                    <img src="images/Banjo the Fool Clear with red ruff.png" alt="Clear Banjo the Fool with red ruff" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('image-pending')">
+                </div>
+                <div class="card-body">
+                    <div class="card-label">DCon Las Vegas 2026</div>
                     <h3>Banjo the Fool</h3>
-
-                    <p>
-                        Never mistake foolishness for stupidity.
-                    </p>
-
-                    <p>
-                        Banjo the Fool is the joker of the bush —
-                        irreverent, ridiculous and probably enjoying
-                        himself far more than he should be.
-                    </p>
-
-                    <p>
-                        He may look the fool, but with Banjo,
-                        appearances have never told the whole story.
-                    </p>
-
+                    <p>The cheeky clown of the bunch. Banjo the Fool wears a bright red ruff, and doesn't seem particularly worried about being taken seriously.</p>
                 </div>
-
             </article>
 
             <article class="card">
-
                 <div class="card-image">
-                    <img src="images/banjo-spattertail.png" alt="Banjo Spattertail">
+                    <img src="images/Banjo Clear (2).png" alt="Clear Banjo figure" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('image-pending')">
                 </div>
-
                 <div class="card-body">
-
-                    <div class="card-label">The Artist... Apparently</div>
-
-                    <h3>Banjo Spattertail</h3>
-
-                    <p>
-                        The outback doesn't colour inside the lines.
-                    </p>
-
-                    <p>
-                        Red dirt. Blue skies. Burnt-orange sunsets.
-                        Dust on absolutely everything.
-                    </p>
-
-                    <p>
-                        Somewhere along the way Banjo decided all of that
-                        needed putting on a canvas.
-                    </p>
-
-                    <p>
-                        Unfortunately, nobody explained how.
-                    </p>
-
-                    <p>
-                        Art? Maybe.<br>
-                        Mess? Definitely.<br>
-                        Banjo? Absolutely.
-                    </p>
-
+                    <div class="card-label">DCon Las Vegas 2026</div>
+                    <h3>Banjo · Clear</h3>
+                    <p>A clear edition that lets Banjo's sculpted details speak for themselves.</p>
                 </div>
+            </article>
 
+            <article class="card">
+                <div class="card-image">
+                    <img src="images/Banjo the Fool - Jacqui edition.png" alt="Hand-painted Banjo the Fool Jacqui Edition" loading="lazy" onerror="this.hidden=true;this.parentElement.classList.add('image-pending')">
+                </div>
+                <div class="card-body">
+                    <div class="card-label">One of One · DCon Las Vegas 2026</div>
+                    <h3>Banjo the Fool · Jacqui Edition</h3>
+                    <p>A unique, hand-painted and signed one-of-one Banjo the Fool by Jacqui. Created for DesignerCon Las Vegas 2026.</p>
+                </div>
             </article>
 
         </div>
